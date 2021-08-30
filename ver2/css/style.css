@@ -12,6 +12,7 @@
 }
 #cal-mth, #cal-yr { background: #ea4c4c; }
 #cal-set { background: #4e83d9; }
+
 /* [CALENDAR] */
 #calendar {
   width: 100%;
@@ -85,6 +86,6 @@
 }
 
 /* [DOES NOT MATTER] */
-html, body, textarea, input{
+html, body, textarea, input {
   font-family: arial, sans-serif;
 }
