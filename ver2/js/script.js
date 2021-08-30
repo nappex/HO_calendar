@@ -5,7 +5,7 @@ var cal = {
   sDay : 0, // Current selected day
   sMth : 0, // Current selected month
   sYear : 0, // Current selected year
-  startMonday : false, // Week start on Monday?
+  startMonday : true, // Week start on Monday?
 
   // (B) DRAW CALENDAR FOR SELECTED MONTH
   list : function () {

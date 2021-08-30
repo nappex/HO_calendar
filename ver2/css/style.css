@@ -1,37 +1,58 @@
 /* [CONTAINER] */
-#cal-wrap { max-width: 600px; }
+#cal-wrap { max-width: 100%; }
 
 /* [PERIOD SELECTOR] */
-#cal-date { display: flex; }
+#cal-date {
+  display: flex;
+  justify-content: center;
+}
 #cal-mth, #cal-yr, #cal-set {
   box-sizing: border-box;
-  padding: 10px 20px;
+  padding: 20px 30px;
+  margin: 20px 30px;
   font-size: 1.2em;
-  border: 0;
   color: #fff;
+  background: #ea4c4c;
+  border-radius: 10px;
 }
-#cal-mth, #cal-yr { background: #ea4c4c; }
-#cal-set { background: #4e83d9; }
+
+#cal-set { background: #4ed959; }
+#cal-mth:hover, #cal-yr:hover, #cal-set:hover {
+  background:#bd3434;
+  cursor: pointer;
+}
+#cal-set:hover {
+  background: #3ba043;
+}
+
 
 /* [CALENDAR] */
 #calendar {
   width: 100%;
-  border-collapse: collapse;
 }
 #calendar tr.head td {
   font-weight: bold;
   text-transform: uppercase;
   color: #fff;
-  background: #f37070;
-  padding: 15px;
+  background: #4fd4d4;
+  padding: 30px;
   text-align: center;
+}
+#calendar tr.head td:nth-last-of-type(-n+2) {
+  background: #e04141;
+
 }
 #calendar tr.day td {
   border: 1px solid #ddd;
   width: 14.28%;
-  padding: 15px 5px;
+  padding: 20px 30px;
   vertical-align: top;
+  text-align: center;
 }
+#calendar tr.head td, #calendar tr.day td {
+  border-radius: 10px;
+}
+
 #calendar tr.day td:hover {
   background: #fff9e4;
   cursor: pointer;
