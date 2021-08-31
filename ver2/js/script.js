@@ -5,7 +5,7 @@ var cal = {
   sDay : 0, // Current selected day
   sMth : 0, // Current selected month
   sYear : 0, // Current selected year
-  startMonday : true, // Week start on Monday?
+  startMonday : false, // Week start on Monday?
 
   // (B) DRAW CALENDAR FOR SELECTED MONTH
   list : function () {
@@ -14,6 +14,8 @@ var cal = {
     // Note - Sun is 0 & Sat is 6
     cal.sMth = parseInt(document.getElementById("cal-mth").value); // selected month
     cal.sYear = parseInt(document.getElementById("cal-yr").value); // selected year
+    cal.startMonday = document.getElementById("start-mon").checked; //
+
     var daysInMth = new Date(cal.sYear, cal.sMth+1, 0).getDate(), // number of days in selected month
         startDay = new Date(cal.sYear, cal.sMth, 1).getDay(), // first day of the month
         endDay = new Date(cal.sYear, cal.sMth, daysInMth).getDay(); // last day of the month
@@ -64,6 +66,7 @@ var cal = {
         cCell = null,
         days = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
     if (cal.startMonday) { days.push(days.shift()); }
+
     for (var d of days) {
       cCell = document.createElement("td");
       cCell.innerHTML = d;
@@ -94,6 +97,17 @@ var cal = {
         cRow = document.createElement("tr");
         cRow.classList.add("day");
       }
+
+    if (cal.startMonday) {
+      let weekendDays = document.querySelectorAll("#calendar tr.head td");
+      for (let i=5; i < 7;  i++) {
+        weekendDays[i].style.background = "#e04141";
+      }
+    } else {
+      for (i of [0, 6]) {
+        weekendDays[i].style.background = "#e04141";
+      }
+    }
     }
 
     // (B5) REMOVE ANY PREVIOUS ADD/EDIT EVENT DOCKET

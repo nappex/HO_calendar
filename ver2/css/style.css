@@ -38,10 +38,11 @@
   padding: 30px;
   text-align: center;
 }
-#calendar tr.head td:nth-last-of-type(-n+2) {
-  background: #e04141;
 
-}
+/* #calendar tr.head td:nth-last-of-type(-n+2) {
+  background: #e04141;
+} */
+
 #calendar tr.day td {
   border: 1px solid #ddd;
   width: 14.28%;
