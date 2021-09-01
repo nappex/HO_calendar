@@ -14,14 +14,18 @@ var cal = {
     // Note - Sun is 0 & Sat is 6
     cal.sMth = parseInt(document.getElementById("cal-mth").value); // selected month
     cal.sYear = parseInt(document.getElementById("cal-yr").value); // selected year
-    cal.startMonday = document.getElementById("start-mon").checked; //
+    cal.startMonday = document.getElementById("monday").checked; // selected start day
 
-    var daysInMth = new Date(cal.sYear, cal.sMth+1, 0).getDate(), // number of days in selected month
-        startDay = new Date(cal.sYear, cal.sMth, 1).getDay(), // first day of the month
-        endDay = new Date(cal.sYear, cal.sMth, daysInMth).getDay(); // last day of the month
+                  // number of days in selected month
+    var daysInMth = new Date(cal.sYear, cal.sMth+1, 0).getDate(),
+        // numerical representation week day of first day of the month
+        startDay = new Date(cal.sYear, cal.sMth, 1).getDay(),
+        // numerical representation week day of last day of the month
+        endDay = new Date(cal.sYear, cal.sMth, daysInMth).getDay();
 
     // (B2) LOAD DATA FROM LOCALSTORAGE
     cal.data = localStorage.getItem("cal-" + cal.sMth + "-" + cal.sYear);
+    console.log(cal.data)
     if (cal.data==null) {
       localStorage.setItem("cal-" + cal.sMth + "-" + cal.sYear, "{}");
       cal.data = {};
@@ -97,17 +101,15 @@ var cal = {
         cRow = document.createElement("tr");
         cRow.classList.add("day");
       }
-
-    if (cal.startMonday) {
-      let weekendDays = document.querySelectorAll("#calendar tr.head td");
-      for (let i=5; i < 7;  i++) {
-        weekendDays[i].style.background = "#e04141";
-      }
-    } else {
-      for (i of [0, 6]) {
-        weekendDays[i].style.background = "#e04141";
-      }
     }
+
+    let weekendDays = document.querySelectorAll("#calendar tr.head td");
+    if (cal.startMonday) {
+      for (i of [5, 6]) { weekendDays[i].style.background = "#e04141"; }
+
+    } else {
+      for (i of [0, 6]) { weekendDays[i].style.background = "#e04141"; }
+
     }
 
     // (B5) REMOVE ANY PREVIOUS ADD/EDIT EVENT DOCKET
@@ -120,7 +122,7 @@ var cal = {
     cal.sDay = el.getElementsByClassName("dd")[0].innerHTML;
 
     // (C2) DRAW EVENT FORM
-    var tForm = "<h1>" + (cal.data[cal.sDay] ? "EDIT" : "ADD") + " EVENT</h1>";
+    let tForm = "<h1>" + (cal.data[cal.sDay] ? "EDIT" : "ADD") + " EVENT</h1>";
     tForm += "<div id='evt-date'>" + cal.sDay + " " + cal.monthNames[cal.sMth] + " " + cal.sYear + "</div>";
     tForm += "<textarea id='evt-details' required>" + (cal.data[cal.sDay] ? cal.data[cal.sDay] : "") + "</textarea>";
     tForm += "<input type='button' value='Close' onclick='cal.close()'/>";
@@ -128,12 +130,16 @@ var cal = {
     tForm += "<input type='submit' value='Save'/>";
 
     // (C3) ATTACH EVENT FORM
-    var eForm = document.createElement("form");
+    let eForm = document.createElement("form");
     eForm.addEventListener("submit", cal.save);
     eForm.innerHTML = tForm;
-    var container = document.getElementById("cal-event");
+    let container = document.getElementById("cal-event");
     container.innerHTML = "";
     container.appendChild(eForm);
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
   },
 
   // (D) CLOSE EVENT DOCKET
@@ -168,9 +174,9 @@ window.addEventListener("load", function () {
       nowYear = parseInt(now.getFullYear());
 
   // (G2) APPEND MONTHS SELECTOR
-  var month = document.getElementById("cal-mth");
-  for (var i = 0; i < 12; i++) {
-    var opt = document.createElement("option");
+  let month = document.getElementById("cal-mth");
+  for (let i = 0; i < 12; i++) {
+    let opt = document.createElement("option");
     opt.value = i;
     opt.innerHTML = cal.monthNames[i];
     if (i==nowMth) { opt.selected = true; }
@@ -179,9 +185,9 @@ window.addEventListener("load", function () {
 
   // (G3) APPEND YEARS SELECTOR
   // Set to 10 years range. Change this as you like.
-  var year = document.getElementById("cal-yr");
-  for (var i = nowYear-10; i<=nowYear+10; i++) {
-    var opt = document.createElement("option");
+  let year = document.getElementById("cal-yr");
+  for (let i = nowYear-10; i<=nowYear+10; i++) {
+    let opt = document.createElement("option");
     opt.value = i;
     opt.innerHTML = i;
     if (i==nowYear) { opt.selected = true; }

@@ -17,11 +17,24 @@
       <div id="cal-wrap">
         <!-- [PERIOD SELECTOR] -->
         <div id="cal-date">
-          <input id="start-mon" type="checkbox" name="start-mon">
-          <label for="start-mon">Start with Monday?</label>
+          <div id="start-day">
+            <div>Week starts on:</div>
+            <div>
+              <input type="radio" id="monday" name="startDay" checked>
+              <label for="monday">Monday</label>
+            </div>
+
+            <div>
+              <input type="radio" id="sunday" name="startDay">
+              <label for="sunday">Sunday</label>
+            </div>
+          </div>
+
           <select id="cal-mth"></select>
           <input id="cal-set" type="button" value="SET"/>
           <select id="cal-yr"></select>
+
+          <input id="cal-export" type="button" value="Export To CSV"/>
         </div>
 
         <!-- [CALENDAR] -->
